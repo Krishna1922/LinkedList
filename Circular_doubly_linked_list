@@ -1,0 +1,103 @@
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+struct node
+{
+  int data;
+  struct node *next;
+  struct node *prev;
+};
+///////////////////////////////////////travrsing/////////////////////////////////////
+void Traversal(struct node* head){
+    struct node* ptr = head;
+    do{
+        cout << ptr->data<<" ";
+        ptr = ptr->next;
+    }while(ptr!=head);
+    
+}
+
+//////////////////////////////delete from beggining////////////////////////////////////
+struct node* Delete_Beg(struct node* head){
+    struct node* p = head;
+    p->prev->next = p->next;
+    p->next->prev = p->prev;
+    head = p;
+    return head;
+}
+/*
+///////////////////////////////delete from any index////////////////////////
+struct node* Delete_index(struct node* head,int index){
+    struct node* p = head;
+    struct node* q = head->next;
+    int i=0;
+    while(i!=index-1){
+        p=p->next;
+        q=q->next;
+        i++;
+    }
+    p->next = q->next;
+    q->next->prev = p;
+    free(q);
+    return head;
+}
+////////////////////////////////////////delete from end////////////////////////////////////
+struct node* Delete_End(struct node* head){
+    struct node* p = head;
+    struct node* q = head->next;
+    while(q->next!=NULL) {
+        p = p->next;
+        q = q->next;
+    }
+    p->next = NULL;
+    free(q);
+    return head;
+}
+*/
+int
+main ()
+{
+
+  /////////////////creating 4 node
+  struct node *head = NULL;
+  struct node *second = NULL;
+  struct node *third = NULL;
+  struct node *fourth = NULL;
+  struct node *fifth = NULL;
+
+
+  /////////////////4  memory allocation////////////////////
+  head = (struct node *) malloc (sizeof (struct node));
+  second = (struct node *) malloc (sizeof (struct node));
+  third = (struct node *) malloc (sizeof (struct node));
+  fourth = (struct node *) malloc (sizeof (struct node));
+  fifth = (struct node *) malloc (sizeof (struct node));
+
+
+  head->data = 1;
+  head->prev = fifth;
+  head->next = second;
+
+  second->data = 2;
+  second->prev = head;
+  second->next = third;
+
+  third->data = 3;
+  third->prev = second;
+  third->next = fourth;
+
+  fourth->data = 4;
+  fourth->prev = third;
+  fourth->next = fifth;
+  
+  fifth->data = 5;
+  fifth->prev = fourth;
+  fifth->next = head;
+
+  Traversal (head);
+  cout << endl << "After Insertion of node" << endl;
+  head = Delete_Beg(head);
+  //head = Insert_End(head,9);
+  Traversal (head);
+
+}

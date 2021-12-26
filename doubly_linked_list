@@ -7,21 +7,54 @@ struct node
   struct node *next;
   struct node *prev;
 };
+///////////////////////////////////////travrsing/////////////////////////////////////
 void Traversal(struct node* head){
     struct node* ptr = head;
     while(ptr!=NULL){
-        cout << ptr->data;
+        cout << ptr->data<<" ";
         ptr = ptr->next;
     }
     
 }
+//////////////////////////////inserting at the beggining////////////////////////////////
 struct node* Insert_Beg(struct node* head,int data){
     struct node* p = (struct node*)malloc(sizeof(struct node));
     p->prev = NULL;
     p->data = data;
-    p->next = head->next;
+    p->next = head;
+    head->prev = p;
+    head = p;
     return head;
     
+}
+///////////////////////////////inserting at any index////////////////////////////////////////
+struct node* Insert_index(struct node* head,int data,int index){
+    struct node* ptr = (struct node*)malloc(sizeof(struct node));
+    struct node* p = head;
+    int i = 0;
+    while(i!=index-1){
+        p = p->next;
+        i++;
+    }
+    ptr->prev = p;
+    ptr->next = p->next;
+    ptr->data = data;
+    p->next=ptr;
+    return head;
+    
+}
+/////////////////////////////////////inserting at the end////////////////////////
+struct node* Insert_End(struct node* head,int data){
+    struct node* ptr = (struct node*)malloc(sizeof(struct node));
+    struct node* p = head;
+    while(p->next!=NULL){
+        p=p->next;
+    }
+    p->next = ptr;
+    ptr->prev = p;
+    ptr->data = data;
+    ptr->next = NULL;
+    return head;
 }
 int
 main ()
@@ -58,10 +91,15 @@ main ()
   fourth->next = NULL;
 
   Traversal (head);
-  cout << endl << "After deletion of node" << endl;
-  head = Insert_Beg(head,5);
+  cout << endl << "After Insertion of node" << endl;
+  //head = Insert_Beg(head,8);
   //head = Delete_index(head,2);
   //head = Delete_End (head);
+  //head = Insert_index(head,9,1);
+ head = Insert_End(head,9);
   Traversal (head);
 
 }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////doubly linked list deletion///////////////////////////////////////////////////////////////

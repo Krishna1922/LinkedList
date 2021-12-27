@@ -20,12 +20,16 @@ void Traversal(struct node* head){
 //////////////////////////////delete from beggining////////////////////////////////////
 struct node* Delete_Beg(struct node* head){
     struct node* p = head;
-    p->prev->next = p->next;
+    struct node* q= head;
+    while(q->next=head){
+        q=q->next;
+    }
+    q->next = p->next;
     p->next->prev = p->prev;
     head = p;
     return head;
 }
-/*
+
 ///////////////////////////////delete from any index////////////////////////
 struct node* Delete_index(struct node* head,int index){
     struct node* p = head;
@@ -53,7 +57,7 @@ struct node* Delete_End(struct node* head){
     free(q);
     return head;
 }
-*/
+
 int
 main ()
 {
@@ -78,7 +82,7 @@ main ()
   head->prev = fifth;
   head->next = second;
 
-  second->data = 2;
+  second->data = 2;                                
   second->prev = head;
   second->next = third;
 

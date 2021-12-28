@@ -57,7 +57,50 @@ struct node* Delete_End(struct node* head){
     free(q);
     return head;
 }
-
+/////////////////////////////////inserting at the beginninng/////////////////////////////////////
+struct node* Insert_Beg(struct node* head, int data){
+    struct node* ptr = (struct node*)malloc(sizeof(struct node));
+    struct node* p = head;
+    p->prev->next = ptr;
+    ptr->prev = p->prev;
+    p->prev = ptr;
+    ptr->next = p;
+    ptr->data = data;
+    head = p->prev;
+    return head;
+    
+}
+////////////////////////////////////////////insertion at any index/////////////////////////////////
+struct node* Insert_Index(struct node* head,int index,int data){
+    struct node* ptr = (struct node*)malloc(sizeof(struct node));
+    struct node* p = head;
+    int i = 0;
+    while(i!=index-1){
+        p=p->next;
+        i++;
+    }
+    p->next->prev = ptr;
+    ptr->next = p->next;
+    ptr->prev = p;
+    p->next = ptr;
+    ptr->data = data;
+    return head;
+    
+}
+/////////////////////////////////////////////inserting at the end////////////////////////////////////////////////
+struct node* Insert_End(struct node* head,int data){
+    struct node* ptr = (struct node*)malloc(sizeof(struct node));
+    struct node* p = head;
+    while(p->next!=head){
+        p=p->next;
+    }
+    ptr->prev = p;
+    ptr->next = p->next;
+    p->next = ptr;
+    p->next->prev = ptr;
+    ptr->data = data;
+    return head;
+}
 int
 main ()
 {
@@ -100,8 +143,10 @@ main ()
 
   Traversal (head);
   cout << endl << "After Insertion of node" << endl;
-  head = Delete_Beg(head);
+  //head = Delete_Beg(head);
   //head = Insert_End(head,9);
+  //head = Insert_Beg(head,8);
+  head = Insert_End(head,9);
   Traversal (head);
 
 }

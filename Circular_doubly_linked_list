@@ -7,7 +7,7 @@ struct node
   struct node *next;
   struct node *prev;
 };
-///////////////////////////////////////travrsing/////////////////////////////////////
+///////////////////////////////////////traversing/////////////////////////////////////
 void Traversal(struct node* head){
     struct node* ptr = head;
     do{
@@ -16,7 +16,17 @@ void Traversal(struct node* head){
     }while(ptr!=head);
     
 }
-
+/////////////////////////////////////reverse traversing/////////////////////////////////
+void Reverse_Traversal(struct node* head){
+    struct node* ptr = head;
+    while(ptr->next!=head){
+        ptr = ptr->next;
+    }
+    do{
+        cout << ptr->data<<" ";
+        ptr = ptr->prev;
+    }while(ptr!=head->prev);
+}
 //////////////////////////////delete from beggining////////////////////////////////////
 struct node* Delete_Beg(struct node* head){
     struct node* p = head;
@@ -105,7 +115,7 @@ int
 main ()
 {
 
-  /////////////////creating 4 node
+  /////////////////creating 4 node//////////////////////////
   struct node *head = NULL;
   struct node *second = NULL;
   struct node *third = NULL;

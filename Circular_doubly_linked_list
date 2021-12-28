@@ -49,11 +49,11 @@ struct node* Delete_index(struct node* head,int index){
 struct node* Delete_End(struct node* head){
     struct node* p = head;
     struct node* q = head->next;
-    while(q->next!=NULL) {
+    while(q->next!=head) {
         p = p->next;
         q = q->next;
     }
-    p->next = NULL;
+    p->next = head;
     free(q);
     return head;
 }
